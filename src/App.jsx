@@ -13,22 +13,24 @@ function App() {
 	});
 
 	function inputNewTweetToData() {
-		setTwee((prevState) => {
-			return [
-				{
-					handle: `@Scrimba`,
-					profilePic: `images/scrimbalogo.png`,
-					likes: 0,
-					retweets: 0,
-					tweetText: newTweet,
-					replies: [],
-					isLiked: false,
-					isRetweeted: false,
-					uuid: nanoid(),
-				},
-				...prevState,
-			];
-		});
+		if (newTweet) {
+			setTwee((prevState) => {
+				return [
+					{
+						handle: `@Scrimba`,
+						profilePic: `images/scrimbalogo.png`,
+						likes: 0,
+						retweets: 0,
+						tweetText: newTweet,
+						replies: [],
+						isLiked: false,
+						isRetweeted: false,
+						uuid: nanoid(),
+					},
+					...prevState,
+				];
+			});
+		}
 		setNewTweet("");
 	}
 

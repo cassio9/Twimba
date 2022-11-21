@@ -1,5 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import Retweet from "./Retweet";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const imagePaths = [];
 //          note relative path vvv                 vvv this gets rid of promises
@@ -12,6 +14,12 @@ Object.values(import.meta.glob("../images/*", { eager: true })).forEach(({ defau
 });
 
 function Tweet(props) {
+	useEffect(() => {
+		AOS.init({
+			duration: 1000,
+		});
+	}, []);
+
 	const [showMessages, setShowMessages] = useState(false);
 	// conditional rendering animation -- pending
 	const [isMounted, setIsMounted] = useState(false);
@@ -51,7 +59,7 @@ function Tweet(props) {
 	});
 
 	return (
-		<div className="">
+		<div className="" data-aos="fade-right">
 			<div className="flex items-start border-t-2 py-5 w-full">
 				<img className="w-16 h-16 rounded-full mr-3" src={`src/${props.profilePic}`} alt="" />
 				<div>
@@ -71,7 +79,11 @@ function Tweet(props) {
 					</div>
 				</div>
 			</div>
-			{showMessages && retweetsHTML}
+			{showMessages && (
+				<div className="" data-aos="fade-right">
+					{retweetsHTML}
+				</div>
+			)}
 		</div>
 	);
 }
